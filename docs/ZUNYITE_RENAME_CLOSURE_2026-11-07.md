@@ -26,16 +26,18 @@
 - Public GUI namespace `zunyite_gui` is available and used by the native
   first-party smoke/gallery examples.
 - `zunyite_gui.wrap_engine`, `zunyite_gui.text_metrics`,
-  `zunyite_gui.ide_workspace_session`, and `zunyite_gui.ide_project_runner`
+  `zunyite_gui.ide_workspace_session`, `zunyite_gui.ide_project_runner`,
+  `zunyite_gui.ide_core_read_bridge` and `zunyite_gui.ide_core_persistent`
   now own their implementations; `pynix_gui` exports the same classes and
   functions through legacy shims, preventing duplicate runtime types.
-  Atomic editor saves now use the `.zunyite-save-` temporary prefix.
-- Canonical `zunyite_gui.ide_*` imports expose Workspace Session and Run
-  through their own implementations; Core Reader, Debug and language tooling
+  Atomic editor saves now use the `.zunyite-save-` temporary prefix;
+  IDE Core subprocess workspaces use `zunyite-ide-core-`.
+- Canonical `zunyite_gui.ide_*` imports expose Workspace Session, Run and
+  IDE Core through their own implementations; Debug and language tooling
   remain compatibility-preserving adapters.
   Native Workspace V4 and the live debugger/IDE Core smoke scripts now consume
   these canonical imports. The real Debug Worker integration passed GitHub
-  Actions with this routing. IDE Core, Debug and tooling implementations are **still housed in**
+  Actions with this routing. Debug and tooling implementations are **still housed in**
   `pynix_gui`; exposing canonical imports is not the same as relocating them.
 
 ## Explicitly preserved compatibility / history
@@ -83,8 +85,8 @@ bash scripts/verify_full_stack.sh quick
 Completion should be measured by public user-visible names, working
 compatibility, and tests, not by blind elimination of the substring `pynix`.
 **Status: compiler source/test-corpus naming is canonical with deliberate
-legacy fixtures. Canonical GUI API imports work and two pure support modules
-have been relocated; IDE service internals, wire identifiers, CI secret and
+legacy fixtures. Canonical GUI API imports work and six modules now have canonical implementation
+ownership; Debug/tooling internals, wire identifiers, CI secret and
 Workspace V4 release consolidation remain open.**
 Native GUI visual acceptance and the transfer of internal implementation
 ownership into the canonical namespace remain separate release gates.
