@@ -31,7 +31,8 @@
   the three `zunyite_gui.ide_tooling_{diagnostics,navigation,symbols}` modules,
   `zunyite_gui.ide_debug_process_client` and both read-only Git services
   (`zunyite_gui.ide_git_snapshot`, `zunyite_gui.ide_git_log`) and
-  `zunyite_gui.ide_file_icons` now own their implementations; `pynix_gui` exports the same classes and
+  `zunyite_gui.ide_file_icons`, `zunyite_gui.ide_syntax_highlight`, and
+  `zunyite_gui.ide_editor_lexer` now own their implementations; `pynix_gui` exports the same classes and
   functions through legacy shims, preventing duplicate runtime types.
   Atomic editor saves now use the `.zunyite-save-` temporary prefix;
   IDE Core subprocess workspaces use `zunyite-ide-core-`.
@@ -88,7 +89,7 @@ bash scripts/verify_full_stack.sh quick
 Completion should be measured by public user-visible names, working
 compatibility, and tests, not by blind elimination of the substring `pynix`.
 **Status: compiler source/test-corpus naming is canonical with deliberate
-legacy fixtures. Canonical GUI API imports work and thirteen modules now have canonical implementation
+legacy fixtures. Canonical GUI API imports work and fifteen modules now have canonical implementation
 ownership; UI internals, wire identifiers, CI secret and
 Workspace V4 release consolidation remain open.**
 Native GUI visual acceptance and the transfer of internal implementation
@@ -100,3 +101,10 @@ The `pynix` icon-type key is retained as a private renderer contract for both
 `.uny` and `.pnx`, and currently maps to the approved visible `ZU` icon.
 Renaming that key requires a synchronized renderer/asset change and is not a
 public branding blocker. `zunyite_gui.ide_file_icons` owns the icon registry.
+
+## Editor highlighting compatibility
+
+The editor lexer owns `ZUNYITE_KEYWORDS` in the canonical Python module.
+The existing JavaScript hook `window.pynixHighlightTokens` is intentionally
+unchanged because WKWebView callers still use it. Both legacy and canonical
+Python imports expose the same lexer text and highlighter Token class.
