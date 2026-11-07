@@ -71,6 +71,7 @@ def test_canonical_ide_bridges_reuse_existing_service_types_and_functions():
     from pynix_gui.ide_workspace_preview import attach_workspace as legacy_attach
 
     assert CanonicalSession is LegacySession
+    assert CanonicalSession.__module__ == "zunyite_gui.ide_workspace_session"
     assert CanonicalCore is LegacyCore
     assert CanonicalRunner is LegacyRunner
     assert CanonicalDebug is LegacyDebug
@@ -129,3 +130,18 @@ def test_canonical_imports_work_in_fresh_interpreter_before_legacy_import():
         capture_output=True, text=True, check=False,
     )
     assert completed.returncode == 0, completed.stderr
+
+
+def test_legacy_workspace_session_uses_canonical_document_and_error_types():
+    from pynix_gui.ide_workspace_session import WorkspaceSession, WorkspaceDocument, WorkspaceError
+    from zunyite_gui.ide_workspace_session import (
+        WorkspaceSession as CanonicalSession,
+        WorkspaceDocument as CanonicalDocument,
+        WorkspaceError as CanonicalError,
+    )
+
+    assert WorkspaceSession is CanonicalSession
+    assert WorkspaceDocument is CanonicalDocument
+    assert WorkspaceError is CanonicalError
+    assert WorkspaceDocument.__module__ == "zunyite_gui.ide_workspace_session"
+    assert WorkspaceError.__module__ == "zunyite_gui.ide_workspace_session"
