@@ -303,3 +303,25 @@ def test_canonical_file_icon_registry_retains_legacy_type_codes():
     assert file_icon_type is old_icon_type
     assert file_icon_type("src/main.uny") == file_icon_type("src/old.pnx")
     assert file_icon_type("src/main.uny") in ICON_TINT
+
+
+def test_editor_lexer_and_preview_highlighting_share_canonical_exports():
+    from zunyite_gui.ide_syntax_highlight import Token, highlight_document
+    from pynix_gui.ide_syntax_highlight import (
+        Token as LegacyToken, highlight_document as legacy_highlight,
+    )
+    from zunyite_gui.ide_editor_lexer import EDITOR_LEXER_JS
+    from pynix_gui.ide_editor_lexer import EDITOR_LEXER_JS as old_lexer
+
+    assert Token is LegacyToken
+    assert highlight_document is legacy_highlight
+    assert Token.__module__ == "zunyite_gui.ide_syntax_highlight"
+    assert EDITOR_LEXER_JS == old_lexer
+    assert "ZUNYITE_KEYWORDS" in EDITOR_LEXER_JS
+    assert "PYNIX_KEYWORDS" not in EDITOR_LEXER_JS
+    assert "window.pynixHighlightTokens=tokenize;" in EDITOR_LEXER_JS
+    preview_source = (
+        Path(__file__).resolve().parents[1] / "pynix_gui/ide_workspace_preview.py"
+    ).read_text(encoding="utf-8")
+    assert "from zunyite_gui.ide_editor_lexer import EDITOR_LEXER_JS" in preview_source
+    assert "from zunyite_gui.ide_syntax_highlight import highlight_document" in preview_source
