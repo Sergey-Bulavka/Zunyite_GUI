@@ -76,7 +76,7 @@ def test_project_symbol_completion_uses_public_compiler_protocol():
 def test_semantic_rename_requires_core_preflight_and_preserves_disk():
     source = (ROOT / "pynix_gui/ide_workspace_preview.py").read_text(encoding="utf-8")
     native = (ROOT / "examples/ide_native_v4.py").read_text(encoding="utf-8")
-    refactor = (ROOT / "pynix_gui/ide_semantic_rename.py").read_text(encoding="utf-8")
+    refactor = (ROOT / "zunyite_gui/ide_semantic_rename.py").read_text(encoding="utf-8")
     assert "window.pynixSemanticRenamePlan=packet=>" in source
     assert "semanticRenameButton.textContent='Rename Symbol'" in source
     assert "file.text!==item.before||file.savedText!==item.before" in source
