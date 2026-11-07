@@ -123,7 +123,7 @@ class WorkspaceSession:
         try:
             with tempfile.NamedTemporaryFile(
                 mode="w", encoding="utf-8", newline="",
-                dir=path.parent, prefix=".pynix-save-", delete=False,
+                dir=path.parent, prefix=".zunyite-save-", delete=False,
             ) as output:
                 temp_name = output.name
                 output.write(doc.text)
