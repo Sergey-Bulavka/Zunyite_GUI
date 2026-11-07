@@ -28,7 +28,9 @@
 - `zunyite_gui.wrap_engine`, `zunyite_gui.text_metrics`,
   `zunyite_gui.ide_workspace_session`, `zunyite_gui.ide_project_runner`,
   `zunyite_gui.ide_core_read_bridge`, `zunyite_gui.ide_core_persistent`,
-  and the three `zunyite_gui.ide_tooling_{diagnostics,navigation,symbols}` modules
+  the three `zunyite_gui.ide_tooling_{diagnostics,navigation,symbols}` modules,
+  `zunyite_gui.ide_debug_process_client` and both read-only Git services
+  (`zunyite_gui.ide_git_snapshot`, `zunyite_gui.ide_git_log`)
   now own their implementations; `pynix_gui` exports the same classes and
   functions through legacy shims, preventing duplicate runtime types.
   Atomic editor saves now use the `.zunyite-save-` temporary prefix;
@@ -38,8 +40,8 @@
   client and additional UI modules remain compatibility-preserving adapters.
   Native Workspace V4 and the live debugger/IDE Core smoke scripts now consume
   these canonical imports. The real Debug Worker integration passed GitHub
-  Actions with this routing. The Debug process client and several UI integrations are **still housed in**
-  `pynix_gui`; exposing canonical imports is not the same as relocating them.
+  Actions with this routing. Several native UI integrations are **still housed in** `pynix_gui`;
+  exposing canonical imports is not the same as relocating them.
 
 ## Explicitly preserved compatibility / history
 
@@ -86,8 +88,8 @@ bash scripts/verify_full_stack.sh quick
 Completion should be measured by public user-visible names, working
 compatibility, and tests, not by blind elimination of the substring `pynix`.
 **Status: compiler source/test-corpus naming is canonical with deliberate
-legacy fixtures. Canonical GUI API imports work and nine modules now have canonical implementation
-ownership; Debug/UI internals, wire identifiers, CI secret and
+legacy fixtures. Canonical GUI API imports work and twelve modules now have canonical implementation
+ownership; UI internals, wire identifiers, CI secret and
 Workspace V4 release consolidation remain open.**
 Native GUI visual acceptance and the transfer of internal implementation
 ownership into the canonical namespace remain separate release gates.
