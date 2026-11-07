@@ -67,7 +67,7 @@ def test_user_facing_navigation_errors_name_zunyite():
     navigation = (ROOT / "pynix_gui" / "ide_tooling_navigation.py").read_text(
         encoding="utf-8"
     )
-    snapshot = (ROOT / "pynix_gui" / "ide_core_read_bridge.py").read_text(
+    snapshot = (ROOT / "zunyite_gui" / "ide_core_read_bridge.py").read_text(
         encoding="utf-8"
     )
     assert "Select a Zunyite source (.uny or legacy .pnx)" in navigation
