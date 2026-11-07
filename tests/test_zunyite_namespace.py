@@ -261,3 +261,30 @@ def test_debugger_canonical_and_legacy_module_alias_in_both_import_orders():
             capture_output=True, text=True,
         )
         assert result.returncode == 0, (first, result.stderr)
+
+
+def test_git_read_only_services_have_single_canonical_types_and_functions():
+    from pynix_gui.ide_git_snapshot import GitSnapshot as LegacySnapshot
+    from zunyite_gui.ide_git_snapshot import GitSnapshot as CanonicalSnapshot
+    from pynix_gui.ide_git_snapshot import read_git_snapshot as old_snapshot
+    from zunyite_gui.ide_git_snapshot import read_git_snapshot as new_snapshot
+    from pynix_gui.ide_git_log import GitLogError as LegacyLogError
+    from zunyite_gui.ide_git_log import GitLogError as CanonicalLogError
+    from pynix_gui.ide_git_log import read_git_log as old_log
+    from zunyite_gui.ide_git_log import read_git_log as new_log
+
+    assert LegacySnapshot is CanonicalSnapshot
+    assert old_snapshot is new_snapshot
+    assert LegacyLogError is CanonicalLogError
+    assert old_log is new_log
+    assert CanonicalSnapshot.__module__ == "zunyite_gui.ide_git_snapshot"
+    assert CanonicalLogError.__module__ == "zunyite_gui.ide_git_log"
+
+
+def test_native_ide_uses_canonical_read_only_git_adapters():
+    source = (Path(__file__).resolve().parents[1] / "examples/ide_native_v4.py").read_text(
+        encoding="utf-8"
+    )
+    for name in ("ide_git_snapshot", "ide_git_log"):
+        assert f"from zunyite_gui.{name} import" in source
+        assert f"from pynix_gui.{name} import" not in source
