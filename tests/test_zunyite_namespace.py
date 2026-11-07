@@ -73,6 +73,7 @@ def test_canonical_ide_bridges_reuse_existing_service_types_and_functions():
     assert CanonicalSession is LegacySession
     assert CanonicalSession.__module__ == "zunyite_gui.ide_workspace_session"
     assert CanonicalCore is LegacyCore
+    assert CanonicalCore.__module__ == "zunyite_gui.ide_core_persistent"
     assert CanonicalRunner is LegacyRunner
     assert CanonicalRunner.__module__ == "zunyite_gui.ide_project_runner"
     assert CanonicalDebug is LegacyDebug
@@ -157,3 +158,16 @@ def test_legacy_run_controller_still_exposes_canonical_error_and_subprocess():
     assert legacy.RunError.__module__ == "zunyite_gui.ide_project_runner"
     # Older test integrations patch this module-level subprocess reference.
     assert legacy.subprocess is canonical.subprocess
+
+
+def test_persistent_core_and_snapshot_errors_share_canonical_identity():
+    import pynix_gui.ide_core_persistent as old_core
+    import zunyite_gui.ide_core_persistent as new_core
+    import pynix_gui.ide_core_read_bridge as old_bridge
+    import zunyite_gui.ide_core_read_bridge as new_bridge
+
+    assert old_core.PersistentCoreReader is new_core.PersistentCoreReader
+    assert old_bridge.CoreSnapshotError is new_bridge.CoreSnapshotError
+    assert new_bridge.CoreSnapshotError.__module__ == "zunyite_gui.ide_core_read_bridge"
+    assert new_core.PersistentCoreReader.__module__ == "zunyite_gui.ide_core_persistent"
+    assert new_core.CoreSnapshotError is new_bridge.CoreSnapshotError
