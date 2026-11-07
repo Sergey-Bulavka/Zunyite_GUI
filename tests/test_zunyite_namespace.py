@@ -194,3 +194,46 @@ def test_canonical_tooling_modules_keep_legacy_import_identity_and_protocol():
     import pynix_gui.ide_tooling_symbols as legacy_module
     import zunyite_gui.ide_tooling_symbols as canonical_module
     assert legacy_module.subprocess is canonical_module.subprocess
+
+
+def test_debugger_migration_uses_single_module_object_and_patchable_worker():
+    import pynix_gui.ide_debug_process_client as old_debug
+    import zunyite_gui.ide_debug_process_client as new_debug
+
+    assert old_debug is new_debug
+    assert old_debug.DebugProcessClient is new_debug.DebugProcessClient
+    assert new_debug.DebugProcessClient.__module__ == "zunyite_gui.ide_debug_process_client"
+    assert old_debug.DebugClientError is new_debug.DebugClientError
+    assert old_debug._Worker is new_debug._Worker
+
+
+def test_debugger_legacy_patch_is_visible_to_canonical_launch(tmp_path, monkeypatch):
+    import pynix_gui.ide_debug_process_client as legacy
+    from zunyite_gui.ide_debug_process_client import DebugProcessClient
+
+    source = tmp_path / "main.uny"
+    source.write_text("function main()\n    print(1)\n", encoding="utf-8")
+    used = []
+
+    class FakeWorker:
+        def __init__(self, python, root):
+            used.append(self)
+            self.closed = False
+
+        def start(self):
+            pass
+
+        def send(self, packet):
+            assert packet["command"] == "launch"
+
+        def receive(self):
+            return {"protocol": "pynix-debug", "version": 1,
+                    "event": "started", "state": "finished", "output": "1"}
+
+        def close(self):
+            self.closed = True
+
+    monkeypatch.setattr(legacy, "_Worker", FakeWorker)
+    reply = DebugProcessClient(tmp_path, tmp_path / "compiler_python").launch("main.uny")
+    assert reply["state"] == "finished"
+    assert len(used) == 1 and used[0].closed
