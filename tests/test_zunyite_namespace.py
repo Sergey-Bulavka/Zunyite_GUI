@@ -336,3 +336,26 @@ def test_semantic_rename_alias_keeps_compiler_query_patch_hook():
     assert legacy.plan_semantic_rename is canonical.plan_semantic_rename
     assert canonical.RenamePlanError.__module__ == "zunyite_gui.ide_semantic_rename"
     assert legacy.query_navigation is canonical.query_navigation
+
+
+def test_semantic_rename_module_alias_works_in_both_import_orders():
+    import subprocess
+    import sys
+
+    for first, second in (
+        ("pynix_gui.ide_semantic_rename", "zunyite_gui.ide_semantic_rename"),
+        ("zunyite_gui.ide_semantic_rename", "pynix_gui.ide_semantic_rename"),
+    ):
+        code = (
+            "import importlib; "
+            f"a=importlib.import_module({first!r}); "
+            f"b=importlib.import_module({second!r}); "
+            "assert a is b; "
+            "assert a.query_navigation is b.query_navigation"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", code],
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True, text=True,
+        )
+        assert result.returncode == 0, (first, result.stderr)
