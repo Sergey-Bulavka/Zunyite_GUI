@@ -587,7 +587,7 @@ def main() -> None:
             response = {"ok": False}
             try:
                 request = dict(message.body())
-                from pynix_gui.ide_file_icons import (
+                from zunyite_gui.ide_file_icons import (
                     ICON_BY_EXTENSION, SPECIAL_NAMES, file_icon_type,
                 )
                 relative = request.get("source")
