@@ -325,3 +325,14 @@ def test_editor_lexer_and_preview_highlighting_share_canonical_exports():
     ).read_text(encoding="utf-8")
     assert "from zunyite_gui.ide_editor_lexer import EDITOR_LEXER_JS" in preview_source
     assert "from zunyite_gui.ide_syntax_highlight import highlight_document" in preview_source
+
+
+def test_semantic_rename_alias_keeps_compiler_query_patch_hook():
+    import pynix_gui.ide_semantic_rename as legacy
+    import zunyite_gui.ide_semantic_rename as canonical
+
+    assert legacy is canonical
+    assert legacy.RenamePlanError is canonical.RenamePlanError
+    assert legacy.plan_semantic_rename is canonical.plan_semantic_rename
+    assert canonical.RenamePlanError.__module__ == "zunyite_gui.ide_semantic_rename"
+    assert legacy.query_navigation is canonical.query_navigation
