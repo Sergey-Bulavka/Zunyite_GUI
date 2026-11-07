@@ -32,7 +32,8 @@
   `zunyite_gui.ide_debug_process_client` and both read-only Git services
   (`zunyite_gui.ide_git_snapshot`, `zunyite_gui.ide_git_log`) and
   `zunyite_gui.ide_file_icons`, `zunyite_gui.ide_syntax_highlight`, and
-  `zunyite_gui.ide_editor_lexer` now own their implementations; `pynix_gui` exports the same classes and
+  `zunyite_gui.ide_editor_lexer` and `zunyite_gui.ide_semantic_rename`
+  now own their implementations; `pynix_gui` exports the same classes and
   functions through legacy shims, preventing duplicate runtime types.
   Atomic editor saves now use the `.zunyite-save-` temporary prefix;
   IDE Core subprocess workspaces use `zunyite-ide-core-`.
@@ -89,7 +90,7 @@ bash scripts/verify_full_stack.sh quick
 Completion should be measured by public user-visible names, working
 compatibility, and tests, not by blind elimination of the substring `pynix`.
 **Status: compiler source/test-corpus naming is canonical with deliberate
-legacy fixtures. Canonical GUI API imports work and fifteen modules now have canonical implementation
+legacy fixtures. Canonical GUI API imports work and sixteen modules now have canonical implementation
 ownership; UI internals, wire identifiers, CI secret and
 Workspace V4 release consolidation remain open.**
 Native GUI visual acceptance and the transfer of internal implementation
@@ -108,3 +109,11 @@ The editor lexer owns `ZUNYITE_KEYWORDS` in the canonical Python module.
 The existing JavaScript hook `window.pynixHighlightTokens` is intentionally
 unchanged because WKWebView callers still use it. Both legacy and canonical
 Python imports expose the same lexer text and highlighter Token class.
+
+## Semantic rename compatibility
+
+`zunyite_gui.ide_semantic_rename` owns the rename planner and imports canonical
+Zunyite tooling navigation. Legacy imports reuse the **same module object**,
+not only the same function exports, because existing consumers patch its
+`query_navigation` hook. The `pynix-tooling` protocol string is intentionally
+unchanged pending coordinated version negotiation.
