@@ -288,3 +288,18 @@ def test_native_ide_uses_canonical_read_only_git_adapters():
     for name in ("ide_git_snapshot", "ide_git_log"):
         assert f"from zunyite_gui.{name} import" in source
         assert f"from pynix_gui.{name} import" not in source
+
+
+def test_canonical_file_icon_registry_retains_legacy_type_codes():
+    from zunyite_gui.ide_file_icons import ICON_BY_EXTENSION, ICON_TINT, file_icon_type
+    from pynix_gui.ide_file_icons import (
+        ICON_BY_EXTENSION as old_extensions,
+        ICON_TINT as old_tints,
+        file_icon_type as old_icon_type,
+    )
+
+    assert ICON_BY_EXTENSION is old_extensions
+    assert ICON_TINT is old_tints
+    assert file_icon_type is old_icon_type
+    assert file_icon_type("src/main.uny") == file_icon_type("src/old.pnx")
+    assert file_icon_type("src/main.uny") in ICON_TINT
