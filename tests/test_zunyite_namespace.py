@@ -237,3 +237,27 @@ def test_debugger_legacy_patch_is_visible_to_canonical_launch(tmp_path, monkeypa
     reply = DebugProcessClient(tmp_path, tmp_path / "compiler_python").launch("main.uny")
     assert reply["state"] == "finished"
     assert len(used) == 1 and used[0].closed
+
+
+def test_debugger_canonical_and_legacy_module_alias_in_both_import_orders():
+    import subprocess
+    import sys
+
+    for first, second in (
+        ("pynix_gui.ide_debug_process_client", "zunyite_gui.ide_debug_process_client"),
+        ("zunyite_gui.ide_debug_process_client", "pynix_gui.ide_debug_process_client"),
+    ):
+        code = (
+            "import importlib, sys; "
+            f"a=importlib.import_module({first!r}); "
+            f"b=importlib.import_module({second!r}); "
+            "assert a is b, (a,b); "
+            "assert a.DebugProcessClient is b.DebugProcessClient; "
+            "assert a._Worker is b._Worker"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", code],
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True, text=True,
+        )
+        assert result.returncode == 0, (first, result.stderr)
