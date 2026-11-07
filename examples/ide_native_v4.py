@@ -371,7 +371,7 @@ def main() -> None:
     if project_path is not None:
         from zunyite_gui.ide_workspace_session import WorkspaceSession
         from zunyite_gui.ide_workspace_preview import attach_workspace, attach_git_snapshot
-        from pynix_gui.ide_git_snapshot import read_git_snapshot
+        from zunyite_gui.ide_git_snapshot import read_git_snapshot
         session = WorkspaceSession(project_path)
         document = attach_workspace(document, session)
         document = attach_git_snapshot(document, read_git_snapshot(session.root))
@@ -665,7 +665,7 @@ def main() -> None:
 
     class GitLogHandler(NSObject):
         def userContentController_didReceiveScriptMessage_(self, controller, message):
-            from pynix_gui.ide_git_log import (
+            from zunyite_gui.ide_git_log import (
                 GitLogError, read_git_log, read_git_commit, read_git_diff,
             )
             try:
