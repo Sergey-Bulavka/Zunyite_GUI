@@ -64,7 +64,7 @@ def test_active_debugger_workflow_uses_canonical_checkout_path():
 
 
 def test_user_facing_navigation_errors_name_zunyite():
-    navigation = (ROOT / "pynix_gui" / "ide_tooling_navigation.py").read_text(
+    navigation = (ROOT / "zunyite_gui" / "ide_tooling_navigation.py").read_text(
         encoding="utf-8"
     )
     snapshot = (ROOT / "zunyite_gui" / "ide_core_read_bridge.py").read_text(
