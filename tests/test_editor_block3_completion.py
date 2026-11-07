@@ -60,7 +60,7 @@ def test_compiler_navigation_uses_live_editor_and_rejects_stale_buffer():
 
 
 def test_project_symbol_completion_uses_public_compiler_protocol():
-    source = (ROOT / "pynix_gui/ide_tooling_symbols.py").read_text(encoding="utf-8")
+    source = (ROOT / "zunyite_gui/ide_tooling_symbols.py").read_text(encoding="utf-8")
     native = (ROOT / "examples/ide_native_v4.py").read_text(encoding="utf-8")
     preview = (ROOT / "pynix_gui/ide_workspace_preview.py").read_text(encoding="utf-8")
     assert '"tooling", "symbols", str(root)' in source
