@@ -9,8 +9,8 @@ import json
 from pathlib import Path
 
 from .ide_workspace_session import WorkspaceSession
-from .ide_syntax_highlight import highlight_document
-from .ide_editor_lexer import EDITOR_LEXER_JS
+from zunyite_gui.ide_syntax_highlight import highlight_document
+from zunyite_gui.ide_editor_lexer import EDITOR_LEXER_JS
 from .ide_editor_tab_controls import TAB_CONTROL_JS
 from .ide_terminal_dock import TERMINAL_DOCK_JS
 from .ide_packages_dock import PACKAGES_DOCK_JS
