@@ -25,14 +25,17 @@
   `zunyite-debugger-external.yml`, and its checkout is `zunyite-compiler`.
 - Public GUI namespace `zunyite_gui` is available and used by the native
   first-party smoke/gallery examples.
-- `zunyite_gui.wrap_engine` and `zunyite_gui.text_metrics` now own their
-  implementations; `pynix_gui` exports the same classes and functions through
-  legacy shims, preventing duplicate runtime types.
-- Canonical `zunyite_gui.ide_*` imports now expose Workspace Session,
-  Core Reader, Run, Debug and tooling as compatibility-preserving adapters.
+- `zunyite_gui.wrap_engine`, `zunyite_gui.text_metrics`,
+  `zunyite_gui.ide_workspace_session`, and `zunyite_gui.ide_project_runner`
+  now own their implementations; `pynix_gui` exports the same classes and
+  functions through legacy shims, preventing duplicate runtime types.
+  Atomic editor saves now use the `.zunyite-save-` temporary prefix.
+- Canonical `zunyite_gui.ide_*` imports expose Workspace Session and Run
+  through their own implementations; Core Reader, Debug and language tooling
+  remain compatibility-preserving adapters.
   Native Workspace V4 and the live debugger/IDE Core smoke scripts now consume
   these canonical imports. The real Debug Worker integration passed GitHub
-  Actions with this routing. IDE service implementations are **still housed in**
+  Actions with this routing. IDE Core, Debug and tooling implementations are **still housed in**
   `pynix_gui`; exposing canonical imports is not the same as relocating them.
 
 ## Explicitly preserved compatibility / history
