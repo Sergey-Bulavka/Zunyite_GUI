@@ -74,6 +74,7 @@ def test_canonical_ide_bridges_reuse_existing_service_types_and_functions():
     assert CanonicalSession.__module__ == "zunyite_gui.ide_workspace_session"
     assert CanonicalCore is LegacyCore
     assert CanonicalRunner is LegacyRunner
+    assert CanonicalRunner.__module__ == "zunyite_gui.ide_project_runner"
     assert CanonicalDebug is LegacyDebug
     assert canonical_attach is legacy_attach
 
@@ -145,3 +146,14 @@ def test_legacy_workspace_session_uses_canonical_document_and_error_types():
     assert WorkspaceError is CanonicalError
     assert WorkspaceDocument.__module__ == "zunyite_gui.ide_workspace_session"
     assert WorkspaceError.__module__ == "zunyite_gui.ide_workspace_session"
+
+
+def test_legacy_run_controller_still_exposes_canonical_error_and_subprocess():
+    import pynix_gui.ide_project_runner as legacy
+    import zunyite_gui.ide_project_runner as canonical
+
+    assert legacy.ProjectRunner is canonical.ProjectRunner
+    assert legacy.RunError is canonical.RunError
+    assert legacy.RunError.__module__ == "zunyite_gui.ide_project_runner"
+    # Older test integrations patch this module-level subprocess reference.
+    assert legacy.subprocess is canonical.subprocess
