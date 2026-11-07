@@ -25,6 +25,7 @@ REQUIRED = {"pynix_gui/__init__.py", "pynix_gui/core.py",
             "zunyite_gui/ide_workspace_session.py",
             "zunyite_gui/ide_project_runner.py",
             "zunyite_gui/ide_debug_process_client.py",
+            "zunyite_gui/ide_git_snapshot.py", "zunyite_gui/ide_git_log.py",
             "pynix_gui/assets/jetbrains_new_ui/manifest.json"}
 
 
