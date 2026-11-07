@@ -6,4 +6,4 @@ The `main` branch now distributes `zunyite-gui`, exposing `zunyite_gui` with `py
 
 Acceptance: all macOS/Windows backend tests, GUI sample smoke tests, resource discovery and file icons support `.uny`, with an intentional compatibility path for `.pnx`.
 
-**Status: package migration and Workspace V4 branch integration merged and checked in CI.** GitHub repository rename, local remotes, and full interactive IDE functionality are separate outstanding tasks.
+**Status: package migration and Workspace V4 branch integration merged and checked in CI.** GitHub repository renamed to `Sergey-Bulavka/Zunyite_GUI` (verified 2026-11-07). Local remotes and full interactive IDE functionality are separate outstanding tasks. The `pynix_gui` package and `pnx-file.png` are retained as compatibility/internal assets; do not remove them without validating imports and resource lookup.
