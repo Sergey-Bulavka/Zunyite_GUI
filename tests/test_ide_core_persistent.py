@@ -371,7 +371,7 @@ def test_core_recovery_bridge_keeps_live_editor_text():
     root = Path(__file__).resolve().parents[1]
     native = (root / "examples" / "ide_native_v4.py").read_text(encoding="utf-8")
     preview = (root / "pynix_gui" / "ide_workspace_preview.py").read_text(encoding="utf-8")
-    adapter = (root / "pynix_gui" / "ide_core_persistent.py").read_text(encoding="utf-8")
+    adapter = (root / "zunyite_gui" / "ide_core_persistent.py").read_text(encoding="utf-8")
     assert "class CoreRecoveryHandler(NSObject):" in native
     assert '"pynixCoreRecover"' in native
     assert "core_reader.restart_with_buffers(buffers)" in native
