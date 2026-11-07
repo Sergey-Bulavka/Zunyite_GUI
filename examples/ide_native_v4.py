@@ -723,7 +723,7 @@ def main() -> None:
     class FileOpenHandler(NSObject):
         def userContentController_didReceiveScriptMessage_(self, controller, message):
             import json
-            from pynix_gui.ide_syntax_highlight import highlight_document
+            from zunyite_gui.ide_syntax_highlight import highlight_document
             request = message.body()
             try:
                 request = dict(request)
