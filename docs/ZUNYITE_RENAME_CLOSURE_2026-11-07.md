@@ -103,6 +103,17 @@ The `pynix` icon-type key is retained as a private renderer contract for both
 Renaming that key requires a synchronized renderer/asset change and is not a
 public branding blocker. `zunyite_gui.ide_file_icons` owns the icon registry.
 
+## Verified migration checkpoint
+
+The completed GitHub Actions `test` workflow for commit `82d8849c`
+passed on **macOS, Windows and Ubuntu**, and the IDE icon parity workflow
+also passed. This checkpoint covers canonical Debug, Git, file icons,
+editor highlighting and semantic rename module migration, including
+identity-preserving legacy aliases, built distribution checks, and the
+existing GUI regression suite. The standalone live debugger bridge passed
+on the earlier canonical integration checkpoint; it has not been
+re-executed manually on macOS against this exact latest commit.
+
 ## Editor highlighting compatibility
 
 The editor lexer owns `ZUNYITE_KEYWORDS` in the canonical Python module.
