@@ -61,7 +61,11 @@ def main():
              "assert GUIWrappedText is OldWrappedText; "
              "from zunyite_gui.ide_workspace_session import WorkspaceSession; "
              "from pynix_gui.ide_workspace_session import WorkspaceSession as OldWorkspace; "
-             "assert WorkspaceSession is OldWorkspace"],
+             "assert WorkspaceSession is OldWorkspace; "
+             "import zunyite_gui.ide_debug_process_client as DebugNew; "
+             "import pynix_gui.ide_debug_process_client as DebugLegacy; "
+             "assert DebugNew is DebugLegacy; "
+             "assert DebugNew._Worker is DebugLegacy._Worker"],
             check=True,
         )
     print("Distribution structure and wheel import: PASS")
