@@ -171,3 +171,26 @@ def test_persistent_core_and_snapshot_errors_share_canonical_identity():
     assert new_bridge.CoreSnapshotError.__module__ == "zunyite_gui.ide_core_read_bridge"
     assert new_core.PersistentCoreReader.__module__ == "zunyite_gui.ide_core_persistent"
     assert new_core.CoreSnapshotError is new_bridge.CoreSnapshotError
+
+
+def test_canonical_tooling_modules_keep_legacy_import_identity_and_protocol():
+    from zunyite_gui.ide_tooling_diagnostics import Problem, DiagnosticSnapshot, read_diagnostics
+    from pynix_gui.ide_tooling_diagnostics import (
+        Problem as LegacyProblem, DiagnosticSnapshot as LegacySnapshot,
+        read_diagnostics as legacy_diagnostics,
+    )
+    from zunyite_gui.ide_tooling_navigation import query_navigation
+    from pynix_gui.ide_tooling_navigation import query_navigation as legacy_navigation
+    from zunyite_gui.ide_tooling_symbols import read_symbols
+    from pynix_gui.ide_tooling_symbols import read_symbols as legacy_symbols
+
+    assert Problem is LegacyProblem
+    assert DiagnosticSnapshot is LegacySnapshot
+    assert read_diagnostics is legacy_diagnostics
+    assert query_navigation is legacy_navigation
+    assert read_symbols is legacy_symbols
+    assert Problem.__module__ == "zunyite_gui.ide_tooling_diagnostics"
+
+    import pynix_gui.ide_tooling_symbols as legacy_module
+    import zunyite_gui.ide_tooling_symbols as canonical_module
+    assert legacy_module.subprocess is canonical_module.subprocess
