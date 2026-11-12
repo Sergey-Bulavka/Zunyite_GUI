@@ -27,7 +27,7 @@ GUI.canvas(...)
 Repository separation is an internal engineering boundary. It must not make UYavir source
 code more complicated.
 
-> **Historical bootstrap migration status (2026-11-07):** Distribution `zunyite-gui` and public Python namespace `zunyite_gui` are canonical. UYavir source uses `.uny` and `zunyite.toml`; `.pnx` and `pynix.toml` remain supported for legacy projects. Native Workspace V4 and real compiler/IDE Core integration have passed local macOS regression and live bridge checks. The internal `pynix_gui` namespace, WebView bridge identifiers, and versioned `pynix-*` protocol IDs are retained as compatibility contracts; internal-module renaming and shipped-product consolidation are **not complete**. Cross-platform GUI visual parity is not yet verified.
+> **Historical bootstrap migration status (2026-11-07):** The current bootstrap distribution `zunyite-gui` and Python namespace `zunyite_gui` remain operational identifiers, not finalized UYavir package names. Existing bootstrap source uses `.uny` and `zunyite.toml`; `.pnx` and `pynix.toml` remain supported for legacy projects. Native Workspace V4 and real compiler/IDE Core integration have passed local macOS regression and live bridge checks. The internal `pynix_gui` namespace, WebView bridge identifiers, and versioned `pynix-*` protocol IDs are retained as compatibility contracts; internal-module renaming and shipped-product consolidation are **not complete**. Cross-platform GUI visual parity is not yet verified.
 
 ## Product principles
 
@@ -83,7 +83,7 @@ native parity gate.
 
 The interactive **Workspace V4** currently lives on
 `feature/icon-system-v4`, in `examples/ide_native_v4.py`. It is a macOS
-WKWebView-based **integration/acceptance prototype**, not the shipped Zunyite_IDE
+WKWebView-based **integration/acceptance prototype**, not the shipped IDE (historical repository `Zunyite_IDE`)
 application or the public cross-platform GUI widget API. It uses
 `examples/icon_direction_preview.html`, `pynix_gui/ide_workspace_session.py`,
 `pynix_gui/ide_workspace_preview.py`, and the existing navigation/diagnostics
