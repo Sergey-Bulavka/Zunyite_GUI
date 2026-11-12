@@ -1,5 +1,7 @@
 # PYNIX GUI Product Completion Gate
 
+> **Historical verification record:** References to PYNIX identify the tested product and protocol names at the time of these gates. The current language name is **UYavir**; the target CLI is `uy` and source extension `.uy`. These historical test results do not establish that UYavir naming or the native Rust/LLVM toolchain has passed the same gates.
+
 ## Status
 
 **macOS REFERENCE-BACKEND GATE ACCEPTED — PYNIX GUI 0.1.6-dev**
