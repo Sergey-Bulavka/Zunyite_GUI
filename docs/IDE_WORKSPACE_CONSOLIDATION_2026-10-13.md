@@ -1,4 +1,4 @@
-# PYNIX ecosystem IDE consolidation — 2026-10-13
+# UYavir IDE consolidation — historical PYNIX-era audit (2026-10-13)
 
 > **Historical architecture audit:** This document records the PYNIX-era consolidation assessment dated 2026-10-13. The current language is UYavir (`uy`, `.uy` target). Historical repository names, source paths and quoted findings below are preserved as evidence; they are not assertions that the UYavir migration is implemented.
 
