@@ -1,8 +1,10 @@
-# Zunyite GUI
+# UYavir GUI
 
-Commercial-grade desktop GUI toolkit for the Zunyite programming language.
+> **UYavir target naming (2026-11-12):** CLI `uy` and source extension `.uy` are approved. Current distribution/import names and Workspace V4 file paths still reflect the Zunyite bootstrap and are not yet migrated or retested.
 
-> **Status:** macOS reference backend and Zunyite language integration are accepted through
+Commercial-grade desktop GUI toolkit for the UYavir programming language.
+
+> **Status:** macOS reference backend and UYavir language integration are accepted through
 > 0.1.6-dev. Text Layout V1–V4, Product Gallery, Responsive Workspace V2,
 > Responsive Content V1 and Advanced Components Quality V1 are implemented and
 > have macOS user acceptance. Automated CI runs on macOS, Windows and Ubuntu;
@@ -10,22 +12,22 @@ Commercial-grade desktop GUI toolkit for the Zunyite programming language.
 >
 > Component version: **0.1.6-dev**
 
-Zunyite GUI is a first-class product of the Zunyite ecosystem. It owns the platform-independent
-GUI model, deterministic layout engine, Zunyite Standard design system, advanced desktop
+UYavir GUI is a first-class product of the UYavir ecosystem. It owns the platform-independent
+GUI model, deterministic layout engine, UYavir Standard design system, advanced desktop
 controls, platform backends, examples/showcase, documentation, and GUI-specific tests.
 
-The Zunyite language continues to expose the simple public surface:
+The UYavir language continues to expose the simple public surface:
 
-```zunyite
+```uyavir
 GUI.button(...)
 GUI.table(...)
 GUI.canvas(...)
 ```
 
-Repository separation is an internal engineering boundary. It must not make Zunyite source
+Repository separation is an internal engineering boundary. It must not make UYavir source
 code more complicated.
 
-> **Naming migration status (2026-11-07):** Distribution `zunyite-gui` and public Python namespace `zunyite_gui` are canonical. Zunyite source uses `.uny` and `zunyite.toml`; `.pnx` and `pynix.toml` remain supported for legacy projects. Native Workspace V4 and real compiler/IDE Core integration have passed local macOS regression and live bridge checks. The internal `pynix_gui` namespace, WebView bridge identifiers, and versioned `pynix-*` protocol IDs are retained as compatibility contracts; internal-module renaming and shipped-product consolidation are **not complete**. Cross-platform GUI visual parity is not yet verified.
+> **Historical bootstrap migration status (2026-11-07):** Distribution `zunyite-gui` and public Python namespace `zunyite_gui` are canonical. UYavir source uses `.uny` and `zunyite.toml`; `.pnx` and `pynix.toml` remain supported for legacy projects. Native Workspace V4 and real compiler/IDE Core integration have passed local macOS regression and live bridge checks. The internal `pynix_gui` namespace, WebView bridge identifiers, and versioned `pynix-*` protocol IDs are retained as compatibility contracts; internal-module renaming and shipped-product consolidation are **not complete**. Cross-platform GUI visual parity is not yet verified.
 
 ## Product principles
 
@@ -69,11 +71,11 @@ Advanced desktop capabilities are built on top of that foundation:
 
 The accepted GUI implementation is being migrated from
 `Sergey-Bulavka/Zunyite` without a rewrite. During extraction both repositories retain
-compatibility coverage until Zunyite can consume this package through a narrow adapter.
+compatibility coverage until UYavir can consume this package through a narrow adapter.
 
 The accepted macOS reference-backend component version is **0.1.6-dev**:
 ADV-04 Canvas 2D, ADV-05 Rich Editor, logical resources, macOS product polish and real
-Zunyite-language integration are accepted. The active Commercial Product Pass adds Design
+UYavir-language integration are accepted. The active Commercial Product Pass adds Design
 System 2, a high-level composition layer and the Product Gallery before the final Windows
 native parity gate.
 
