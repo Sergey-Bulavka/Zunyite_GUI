@@ -1,5 +1,7 @@
 # Stability & Release Readiness — audit (2026-10-10)
 
+> **Historical release audit:** The PYNIX GUI results below describe the tested 2026-10-10 bootstrap product. UYavir is the current language name; `uy` and `.uy` are target names, not capabilities validated by this historical release audit.
+
 ## Current baseline
 
 - PYNIX GUI version: **0.1.6-dev**, explicitly **pre-alpha** in packaging.
