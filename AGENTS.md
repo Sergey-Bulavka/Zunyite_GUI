@@ -1,4 +1,4 @@
-# UYavir GUI Development Rules 
+# UYavir GUI Development Rules
 
 > **Naming baseline (2026-11-12):** The current language is **UYavir**, target CLI **`uy`**, target source extension **`.uy`**. Existing repository names and bootstrap identifiers are historical operational paths, not permission to assume the new toolchain has shipped.
 
